@@ -1,0 +1,22 @@
+{
+  "name": "drink-budd",
+  "version": "0.0.0",
+  "description": "WebRTC app with ReactJS",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node ./server/index.js",
+    "test": ""
+  },
+  "keywords": [
+    "webrtc",
+    "nodejs",
+    "react",
+    "javascript"
+  ],
+  "author": "spawnius",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.3",
+    "peer": "^0.2.8"
+  }
+}

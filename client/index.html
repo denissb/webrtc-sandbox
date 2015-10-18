@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PeerJS test</title>
+</head>
+<script src="/lib/peerjs/peer.min.js"></script>
+<script type="text/javascript">
+    var id = Math.floor(Math.random() * 100000);
+
+    window.onload = function() {
+    	document.getElementById('connectId').innerText = 'Your id is ' + id;	
+		document.getElementById('join').addEventListener('click', join);
+		document.getElementById('call').addEventListener('click', call);
+		//document.getElementById('answer').addEventListener('click', answer);
+
+		var chatBox = document.getElementById('chatBox'),
+			videoElement = document.getElementById('videoElement');
+			messageFiled = document.getElementById('message'),
+			peer = new Peer(id, {host: 'localhost', port: 9000, path: '/api'}),
+			connections = [],
+			navigator.getUserMedia = (navigator.getUserMedia ||
+							navigator.webkitGetUserMedia ||
+							navigator.mozGetUserMedia ||
+							navigator.msGetUserMedia);
+
+		function initEvents(conn) {
+			chatBox.innerHTML+= '<p>' + conn.metadata.id +  ' joined</p>';
+
+			conn.on('data', function(data) {
+				chatBox.innerHTML += '<p>' + conn.metadata.id + ': '+ data + '</p>';
+			});
+
+			document.getElementById('send').addEventListener('click', function() {
+				conn.send(messageFiled.value);
+			});
+		}
+
+		function join() {
+			var peerId = document.getElementById('peerId').value,
+				conn = peer.connect(peerId, {metadata: {id: id}});
+
+			conn.on('data', function(data) {
+				chatBox.innerHTML += '<p>' + peerId + ': '+ data + '</p>';
+			});
+
+			document.getElementById('send').addEventListener('click', function() {
+				conn.send(messageFiled.value);
+				chatBox.innerHTML += '<p>You: ' + messageFiled.value + '</p>';
+			});
+		}
+
+		peer.on('connection', function(conn) {
+			if (connections.length === 0) {
+				document.getElementById('send').addEventListener('click', function() {	
+					chatBox.innerHTML+= '<p>You: ' + messageFiled.value + '</p>';
+				});
+			}
+
+       		initEvents(conn);
+       		connections.push(conn);
+		});
+
+		function call() {
+			var peerId = document.getElementById('peerId').value;
+
+			navigator.getUserMedia({video: true, audio: true}, function(stream) {
+				var call = peer.call(peerId, stream);
+				call.on('stream', function(remoteStream) {
+					var windowURL = window.URL || window.webkitURL;
+					videoElement.src = windowURL.createObjectURL(remoteStream);
+					videoElement.play();
+				});
+			}, function(err) {
+				console.log('Failed to get local stream' ,err);
+			});
+		}
+
+		peer.on('call', function(call) {
+			navigator.getUserMedia({video: true, audio: true}, function(stream) {
+				call.answer(stream); // Answer the call with an A/V stream.
+				call.on('stream', function(remoteStream) {
+					var windowURL = window.URL || window.webkitURL;
+					videoElement.src = windowURL.createObjectURL(remoteStream);
+					videoElement.play();
+				});
+			}, function(err) {
+				console.log('Failed to get local stream' ,err);
+			});
+		});
+		
+    }
+</script>
+<body>
+	<h1 id="connectId"></h1>
+	<input type="text" id="peerId" />
+	<button id="join" value="Join">JOIN</button>
+	<hr>
+	<div>
+		<input type="text" id="message" size="80" />
+		<button id="send">SEND</button>
+		<button id="call">CALL</button>
+		<button id="answer">ANSWER</button>
+	</div>
+	<div id="chatBox" style="float: left; width: 50%;"></div>
+	<video id="videoElement" style="float: right; width: 50%;"></video> 
+</body>
+</html>
