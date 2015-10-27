@@ -8,7 +8,7 @@ console.log('Listening on port', port);
 
 //PeerJS stuff
 var options = {
-    debug: process.env.DEBUG || true
+    debug: process.env.DEBUG || true,
 }
 
 app.use('/api', ExpressPeerServer(server, options));

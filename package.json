@@ -5,7 +5,7 @@
   "main": "server/index.js",
   "scripts": {
     "start": "node ./server/index.js",
-    "test": ""
+    "tsc": "tsc -p client/src/app -w"
   },
   "keywords": [
     "webrtc",
@@ -16,7 +16,12 @@
   "author": "spawnius",
   "license": "MIT",
   "dependencies": {
+    "angular2": "2.0.0-alpha.44",
     "express": "^4.13.3",
-    "peer": "^0.2.8"
+    "peer": "^0.2.8",
+    "systemjs": "0.19.2"
+  },
+  "devDependencies": {
+    "typescript": "^1.6.2"
   }
 }

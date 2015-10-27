@@ -1,0 +1,1 @@
+{"version":3,"file":"app.js","sourceRoot":"","sources":["app.ts"],"names":["WebRTCAppComponent","WebRTCAppComponent.constructor"],"mappings":";;;;;;;;;;;AAAA,yBAAmC,mBAAmB,CAAC,CAAA;AACvD;IAAAA;IAI2BC,CAACA;IAJ5BD;QAACA,oBAASA,CAACA;YACPA,QAAQA,EAAEA,aAAaA;YACvBA,QAAQA,EAAEA,sBAAsBA;SACnCA,CAACA;;2BAC0BA;IAADA,yBAACA;AAADA,CAACA,AAJ5B,IAI4B;AAC5B,oBAAS,CAAC,kBAAkB,CAAC,CAAC"}
