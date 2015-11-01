@@ -7,25 +7,25 @@
 		var userId = Math.floor(Math.random() * 100000),
 			id = window.location.pathname.slice(1) + userId;
 			
-		document.getElementById('call').addEventListener('click', callPeers);
+		//document.getElementById('call').addEventListener('click', callPeers);
 		document.getElementById('send').addEventListener('click', function() {	
 			chatBox.innerHTML+= '<p>You: ' + messageFiled.value + '</p>';
 		});
 		
 		document.getElementById('fullScreen').addEventListener('click', function() {
-			if (videoElement.requestFullscreen) {
-				videoElement.requestFullscreen();
-			} else if (videoElement.webkitRequestFullscreen) {
-				videoElement.webkitRequestFullscreen();
-			} else if (videoElement.mozRequestFullScreen) {
-				videoElement.mozRequestFullScreen();
-			} else if (videoElement.msRequestFullscreen) {
-				videoElement.msRequestFullscreen();
+			if (videoContainer.requestFullscreen) {
+				videoContainer.requestFullscreen();
+			} else if (videoContainer.webkitRequestFullscreen) {
+				videoContainer.webkitRequestFullscreen();
+			} else if (videoContainer.mozRequestFullScreen) {
+				videoContainer.mozRequestFullScreen();
+			} else if (videoContainer.msRequestFullscreen) {
+				videoContainer.msRequestFullscreen();
 			}
 		});
 
 		var chatBox = document.getElementById('chatBox'),
-			videoElement = document.getElementById('videoElement');
+			videoContainer = document.getElementById('videoContainer');
 			messageFiled = document.getElementById('message'),
 			peer = new Peer(id, {host: 'localhost', port: 9000, path: '/api'}),
 			connections = [],
@@ -37,7 +37,9 @@
 				navigator.msGetUserMedia
 			);
 
-		joinPeers();	
+		// Instantly calling all peers
+		joinPeers();
+		callPeers();	
 
 		function initEvents(conn) {
 			chatBox.innerHTML+= '<p>' + conn.metadata.id +  ' joined</p>';
@@ -63,7 +65,7 @@
 
 		function callPeers() {
 			// Still needs some DOM magic (create <video> elements on the fly per peer)
-			//PEERS.forEach(call);
+			PEERS.forEach(call);
 		}
 
 		function join(peerId) {
@@ -90,11 +92,15 @@
 		// MEDIA stuff
 		function call(peerId) {
 
-			navigator.getUserMedia({video: true, audio: true}, function(stream) {
+			navigator.getUserMedia({video: false, audio: true}, function(stream) {
 				var call = peer.call(window.location.pathname.slice(1) + peerId, stream);
 				call.on('stream', function(remoteStream) {
-					var windowURL = window.URL || window.webkitURL;
+					var videoElement = document.createElement('video'),
+						windowURL = window.URL || window.webkitURL;
+
+					videoElement.style.width = '30%';	
 					videoElement.src = windowURL.createObjectURL(remoteStream);
+					videoContainer.appendChild(videoElement);
 					videoElement.play();
 
 					document.getElementById('fullScreen').style.display = "inline-block";
@@ -105,15 +111,19 @@
 		}
 
 		peer.on('call', function(call) {
-			if (!confirm('Answer the call?')) {
+			/*if (!confirm('Answer the call?')) {
 				return;
-			}
+			}*/
 
-			navigator.getUserMedia({video: true, audio: true}, function(stream) {
+			navigator.getUserMedia({video: false, audio: true}, function(stream) {
 				call.answer(stream); // Answer the call with an A/V stream.
 				call.on('stream', function(remoteStream) {
-					var windowURL = window.URL || window.webkitURL;
+					var videoElement = document.createElement('video'),
+						windowURL = window.URL || window.webkitURL;
+
+					videoElement.style.width = '30%';	
 					videoElement.src = windowURL.createObjectURL(remoteStream);
+					videoContainer.appendChild(videoElement);
 					videoElement.play();
 
 					document.getElementById('fullScreen').style.display = "inline-block";
