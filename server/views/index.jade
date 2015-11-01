@@ -7,13 +7,12 @@ html
         script(src='/src/system.js')
         script(src='/src/angular2.dev.js')
         script.
-            var peers = [#{peers}]
+            var PEERS = [#{peers}]
             System.config({
             	packages: {'src/app': {defaultExtension: 'js'}}
             });
             System.import('src/app/app');
     body
-        button#join(value='Join') JOIN
         button#call CALL
         button#fullScreen(style='display: none;') FULL SCREEN
         hr

@@ -4,8 +4,9 @@
 	}
 
 	function init() {
-		var id = window.location.pathname.slice(1) + Math.floor(Math.random() * 100000);
-		document.getElementById('join').addEventListener('click', joinPeers);
+		var userId = Math.floor(Math.random() * 100000),
+			id = window.location.pathname.slice(1) + userId;
+			
 		document.getElementById('call').addEventListener('click', callPeers);
 		document.getElementById('send').addEventListener('click', function() {	
 			chatBox.innerHTML+= '<p>You: ' + messageFiled.value + '</p>';
@@ -36,6 +37,8 @@
 				navigator.msGetUserMedia
 			);
 
+		joinPeers();	
+
 		function initEvents(conn) {
 			chatBox.innerHTML+= '<p>' + conn.metadata.id +  ' joined</p>';
 
@@ -55,16 +58,16 @@
 		}
 
 		function joinPeers() {
-			peers.forEach(join);
+			PEERS.forEach(join);
 		}
 
 		function callPeers() {
 			// Still needs some DOM magic (create <video> elements on the fly per peer)
-			//peers.forEach(call);
+			//PEERS.forEach(call);
 		}
 
 		function join(peerId) {
-			var conn = peer.connect(window.location.pathname.slice(1) + peerId, {metadata: {id: id}});
+			var conn = peer.connect(window.location.pathname.slice(1) + peerId, {metadata: {id: userId}});
 
 			peer.on('error', function() {
 				chatBox.innerHTML += '<p>Failed to join ' + peerId + '</p>';
@@ -123,6 +126,5 @@
 		peer.on('connection', function(conn) {
 	   		initEvents(conn);
 		});
-
 	}
 })();
