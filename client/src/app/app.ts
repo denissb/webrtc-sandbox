@@ -6,16 +6,16 @@ class Peer {
 }
 
 var PEERS: Peer[] = [
-	{ "connectId": 11, "name": "Mr. Nice" },
-	{ "connectId": 12, "name": "Narco" },
-	{ "connectId": 13, "name": "Bombasto" },
-	{ "connectId": 14, "name": "Celeritas" },
-	{ "connectId": 15, "name": "Magneta" },
-	{ "connectId": 16, "name": "RubberMan" },
-	{ "connectId": 17, "name": "Dynama" },
-	{ "connectId": 18, "name": "Dr IQ" },
-	{ "connectId": 19, "name": "Magma" },
-	{ "connectId": 20, "name": "Tornado" }
+	{ "connectId": "11", "name": "Mr. Nice" },
+	{ "connectId": "12", "name": "Narco" },
+	{ "connectId": "13", "name": "Bombasto" },
+	{ "connectId": "14", "name": "Celeritas" },
+	{ "connectId": "15", "name": "Magneta" },
+	{ "connectId": "16", "name": "RubberMan" },
+	{ "connectId": "17", "name": "Dynama" },
+	{ "connectId": "18", "name": "Dr IQ" },
+	{ "connectId": "19", "name": "Magma" },
+	{ "connectId": "20", "name": "Tornado" }
 ];
 
 @Component({
@@ -28,6 +28,10 @@ class WebRTCAppComponent {
 	public ownPeer: Peer; 
 
 	public peers = PEERS;
+
+	onSelect(peer: Peer) { 
+		console.log(peer.connectId); 
+	}
 }
 
 bootstrap(WebRTCAppComponent);

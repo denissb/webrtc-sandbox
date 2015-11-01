@@ -9,6 +9,11 @@ var express = require('express'),
 var server = app.listen(port),
 	peerRooms = rooms();
 
+// Setting up express
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jade');
+app.use(express.static(clientFolder));
+
 console.log('Listening on port', port);
 
 app.get('/', function (req, res) {
@@ -16,11 +21,10 @@ app.get('/', function (req, res) {
 	res.redirect('/' + randomPeerId);
 });
 
-app.get('/[\\w]{16,}', function (req, res) {
-	res.sendFile(clientFolder + '/index.html');
+app.get('/[\\w]{16}', function (req, res) {
+    var roomId = req.path.substring(1);
+	res.render('index', { peers: peerRooms.getPeers(roomId)});
 });
-
-app.use(express.static(clientFolder));
 
 //PeerJS stuff
 var peerServer = PeerServer({port: 9000, path: '/api', proxied: true});

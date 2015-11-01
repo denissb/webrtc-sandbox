@@ -16,22 +16,25 @@ var Peer = (function () {
     return Peer;
 })();
 var PEERS = [
-    { "connectId": 11, "name": "Mr. Nice" },
-    { "connectId": 12, "name": "Narco" },
-    { "connectId": 13, "name": "Bombasto" },
-    { "connectId": 14, "name": "Celeritas" },
-    { "connectId": 15, "name": "Magneta" },
-    { "connectId": 16, "name": "RubberMan" },
-    { "connectId": 17, "name": "Dynama" },
-    { "connectId": 18, "name": "Dr IQ" },
-    { "connectId": 19, "name": "Magma" },
-    { "connectId": 20, "name": "Tornado" }
+    { "connectId": "11", "name": "Mr. Nice" },
+    { "connectId": "12", "name": "Narco" },
+    { "connectId": "13", "name": "Bombasto" },
+    { "connectId": "14", "name": "Celeritas" },
+    { "connectId": "15", "name": "Magneta" },
+    { "connectId": "16", "name": "RubberMan" },
+    { "connectId": "17", "name": "Dynama" },
+    { "connectId": "18", "name": "Dr IQ" },
+    { "connectId": "19", "name": "Magma" },
+    { "connectId": "20", "name": "Tornado" }
 ];
 var WebRTCAppComponent = (function () {
     function WebRTCAppComponent() {
         this.title = 'WebRTC app';
         this.peers = PEERS;
     }
+    WebRTCAppComponent.prototype.onSelect = function (peer) {
+        console.log(peer.connectId);
+    };
     WebRTCAppComponent = __decorate([
         angular2_1.Component({
             selector: 'web-rtc-app',

@@ -28,8 +28,6 @@ var Rooms = function() {
 		add: function (roomId, peerId) {
 			var index = findIndex(roomId);
 
-			console.log(list[index]);
-
 			if (index > -1) {
 				list[index].peers.push(peerId);
 				return list[index].peers;
