@@ -4,9 +4,7 @@
 	}
 
 	function init() {
-		var id = Math.floor(Math.random() * 100000);
-
-		document.getElementById('connectId').innerText = 'Your id is ' + id;	
+		var id = window.location.pathname.slice(1) + Math.floor(Math.random() * 100000);
 		document.getElementById('join').addEventListener('click', join);
 		document.getElementById('call').addEventListener('click', call);
 		document.getElementById('send').addEventListener('click', function() {	

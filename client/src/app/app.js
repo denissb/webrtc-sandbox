@@ -10,13 +10,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var angular2_1 = require('angular2/angular2');
+var Peer = (function () {
+    function Peer() {
+    }
+    return Peer;
+})();
+var PEERS = [
+    { "connectId": 11, "name": "Mr. Nice" },
+    { "connectId": 12, "name": "Narco" },
+    { "connectId": 13, "name": "Bombasto" },
+    { "connectId": 14, "name": "Celeritas" },
+    { "connectId": 15, "name": "Magneta" },
+    { "connectId": 16, "name": "RubberMan" },
+    { "connectId": 17, "name": "Dynama" },
+    { "connectId": 18, "name": "Dr IQ" },
+    { "connectId": 19, "name": "Magma" },
+    { "connectId": 20, "name": "Tornado" }
+];
 var WebRTCAppComponent = (function () {
     function WebRTCAppComponent() {
+        this.title = 'WebRTC app';
+        this.peers = PEERS;
     }
     WebRTCAppComponent = __decorate([
         angular2_1.Component({
             selector: 'web-rtc-app',
-            template: '<h1>Hello world</h1>'
+            templateUrl: '/src/app/templates/peer-info.html',
+            directives: [angular2_1.CORE_DIRECTIVES, angular2_1.FORM_DIRECTIVES],
         }), 
         __metadata('design:paramtypes', [])
     ], WebRTCAppComponent);
