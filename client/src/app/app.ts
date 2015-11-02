@@ -1,11 +1,8 @@
 import {Component, bootstrap, CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/angular2';
+import {Budd} from './models/budd'
+import {PeerService} from './services/peer'
 
-class Peer {
-	connectId: string;
-	name: string;
-}
-
-var PEERS: Peer[] = [
+var BUDDS: Budd[] = [
 	{ "connectId": "11", "name": "Mr. Nice" },
 	{ "connectId": "12", "name": "Narco" },
 	{ "connectId": "13", "name": "Bombasto" },
@@ -24,14 +21,18 @@ var PEERS: Peer[] = [
     directives: [CORE_DIRECTIVES, FORM_DIRECTIVES],
 })
 class WebRTCAppComponent {
+    public peer: Object;
+
+	constructor(peerService: PeerService) {
+        this.peer = peerService.getPeer();
+	}
+
 	public title = 'WebRTC app';
-	public ownPeer: Peer; 
+    public peers = BUDDS;
 
-	public peers = PEERS;
-
-	onSelect(peer: Peer) { 
-		console.log(peer.connectId); 
+	onSelect(budd: Budd) { 
+		console.log(budd);
 	}
 }
 
-bootstrap(WebRTCAppComponent);
+bootstrap(WebRTCAppComponent, [PeerService]);

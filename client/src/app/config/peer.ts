@@ -9,4 +9,4 @@ export var config: PeerConfig = {
     host: 'localhost',
     port: 9000,
     path: '/api'
-}
+};
