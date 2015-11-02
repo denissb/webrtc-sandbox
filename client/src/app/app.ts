@@ -1,6 +1,7 @@
 import {Component, bootstrap, CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/angular2';
 import {Budd} from './models/budd'
 import {PeerService} from './services/peer'
+import {StartCallComponent} from './components/start-call'
 
 var BUDDS: Budd[] = [
 	{ "connectId": "11", "name": "Mr. Nice" },
@@ -18,7 +19,7 @@ var BUDDS: Budd[] = [
 @Component({
     selector: 'web-rtc-app',
     templateUrl: '/src/app/templates/peer-info.html',
-    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES],
+    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, StartCallComponent],
 })
 class WebRTCAppComponent {
     public peer: Object;

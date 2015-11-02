@@ -1,4 +1,4 @@
-import {config} from '../config/peer';
+import {PeerConfig} from '../config/peer';
 
 declare var Peer: any;
 declare var PEERS: Array<number>;
@@ -12,7 +12,7 @@ export class PeerService {
         this.userId = Math.floor(Math.random() * 100000),
         this.id = location.pathname.slice(1) + this.userId;
 
-        this.peer = new Peer(this.id, config);
+        this.peer = new Peer(this.id, PeerConfig);
     }
 
     getPeer() {
