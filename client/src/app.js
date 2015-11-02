@@ -7,7 +7,7 @@
 		var userId = Math.floor(Math.random() * 100000),
 			id = window.location.pathname.slice(1) + userId;
 			
-		//document.getElementById('call').addEventListener('click', callPeers);
+		document.getElementById('start').addEventListener('click', start);
 		document.getElementById('send').addEventListener('click', function() {	
 			chatBox.innerHTML+= '<p>You: ' + messageFiled.value + '</p>';
 		});
@@ -38,8 +38,10 @@
 			);
 
 		// Instantly calling all peers
-		joinPeers();
-		callPeers();	
+		function start() {
+			joinPeers();
+			callPeers();	
+		}
 
 		function initEvents(conn) {
 			chatBox.innerHTML+= '<p>' + conn.metadata.id +  ' joined</p>';

@@ -1,2 +1,4 @@
 /node_modules
 /client/lib
+/client/src/app/**/*.js
+/client/src/app/**/*.js.map
