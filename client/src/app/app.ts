@@ -1,6 +1,7 @@
 import {Component, bootstrap, CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/angular2';
 import {Budd} from './models/budd'
 import {PeerService} from './services/peer'
+import {NavigatorService} from './services/navigator'
 import {StartCallComponent} from './components/start-call'
 
 var BUDDS: Budd[] = [
@@ -24,9 +25,14 @@ var BUDDS: Budd[] = [
 class WebRTCAppComponent {
     public peer: Object;
 
-	constructor(peerService: PeerService) {
+	constructor(peerService: PeerService, navigatorService: NavigatorService) {
         this.peer = peerService.getPeer();
-	}
+        navigatorService.getUserMedia().then(function(stream) {
+            console.log(stream);
+        }, function(err) {
+            console.log(err);
+        });
+    }
 
 	public title = 'WebRTC app';
     public peers = BUDDS;
@@ -36,4 +42,4 @@ class WebRTCAppComponent {
 	}
 }
 
-bootstrap(WebRTCAppComponent, [PeerService]);
+bootstrap(WebRTCAppComponent, [PeerService, NavigatorService]);
