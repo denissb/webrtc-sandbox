@@ -1,7 +1,6 @@
 import {PeerConfig} from '../config/peer';
 
 declare var Peer: any;
-declare var PEERS: Array<number>;
 
 export class PeerService {
     private peer: any;
@@ -27,7 +26,15 @@ export class PeerService {
         return this.peer.call(this.roomId + peerId, stream);
     }
 
-    getRoomId() {
+    getConnect(peerId) {
+        return this.peer.connect(this.roomId + this.userId, {
+            metadata: { 
+                id: this.userId 
+            }
+        });
+    }
+
+    getRoomId(): string {
         return this.roomId;
     }
 }

@@ -1,36 +1,36 @@
 import {Component, View, bootstrap} from 'angular2/angular2'
-import {PeerService} from '../services/peer'
+import {ConnectService} from '../services/connect'
 import {APIService} from '../services/api'
 
 @Component({
     selector: 'start-call',
-    template:`
-        <div>Hello my name is . <button (click)='call()'>Call</button></div>
+    template: `
+        <div>
+            <button (click)='call()'>Call</button>
+        </div>
         `
 })
 export class StartCallComponent {
-    roomId: string;
     apiService: APIService;
-    peerService: PeerService;
-    peer: Object;
+    connectService: ConnectService;
 
-    constructor(peerService: PeerService, apiService: APIService) {
-        this.peerService = peerService;
-        this.roomId = peerService.getRoomId();
+    constructor(connectService: ConnectService, apiService: APIService) {
+        this.connectService = connectService;
         this.apiService = apiService;
     }
 
     call() {
-        this.apiService.getPeers(this.roomId)
+        this.apiService.getPeers(this.connectService.getRoomId())
             .then(
             r => {
                 return r.json().then(data => {
-                    console.log(data.peers); // Now something needs to be done with the peer list?
-                    this.peer = this.peerService.getPeer();   
+                    this.connectService.start(data.peers);
+                }, err => {
+                    alert('Sorry, something went wrong :/');
                 })
             },
             err => {
-                alert('Sorry, an error occured for retreving the peer list!')
+                alert('Sorry, an error occured while retreving the peer list!')
             }
             );
     }
