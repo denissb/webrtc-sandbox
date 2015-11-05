@@ -14,6 +14,7 @@ export class NavigatorService {
         );
     }
 
+    //TODO: optional arguments for video and audio
     getUserMedia(): Promise<any> {
         var streamPromise = new Promise<any>((resolve, reject) => {
             navigator.getUserMedia({ video: true, audio: true },

@@ -23,11 +23,17 @@ app.get('/', function (req, res) {
 
 app.get('/[\\w]{16}', function (req, res) {
     var roomId = req.path.substring(1);
-	res.render('index', { peers: peerRooms.getPeers(roomId)});
+	res.render('index');
 });
 
+app.get('/api/room/:id', function (req, res) {
+    res.json({
+        peers: peerRooms.getPeers(req.params.id)
+    });
+})
+
 //PeerJS stuff
-var peerServer = PeerServer({port: 9000, path: '/api', proxied: true});
+var peerServer = PeerServer({port: 9000, path: '/connect', proxied: true});
 
 peerServer.on('connection', function (id) {
   var peerId = id.slice(16),

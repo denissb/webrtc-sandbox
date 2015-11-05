@@ -1,6 +1,7 @@
 import {Component, bootstrap, CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/angular2';
 import {Budd} from './models/budd'
 import {PeerService} from './services/peer'
+import {APIService} from './services/api'
 import {NavigatorService} from './services/navigator'
 import {StartCallComponent} from './components/start-call'
 
@@ -23,10 +24,8 @@ var BUDDS: Budd[] = [
     directives: [CORE_DIRECTIVES, FORM_DIRECTIVES, StartCallComponent],
 })
 class WebRTCAppComponent {
-    public peer: Object;
 
-	constructor(peerService: PeerService, navigatorService: NavigatorService) {
-        this.peer = peerService.getPeer();
+	constructor(navigatorService: NavigatorService) {
         navigatorService.getUserMedia().then(function(stream) {
             console.log(stream);
         }, function(err) {
@@ -42,4 +41,4 @@ class WebRTCAppComponent {
 	}
 }
 
-bootstrap(WebRTCAppComponent, [PeerService, NavigatorService]);
+bootstrap(WebRTCAppComponent, [PeerService, NavigatorService, APIService]);

@@ -13,15 +13,21 @@ export class PeerService {
         this.roomId = location.pathname.slice(1);
         this.userId = Math.floor(Math.random() * 100000),
         this.id = this.roomId + this.userId;
-
-        this.peer = new Peer(this.id, PeerConfig);
     }
 
     getPeer() {
+        if (!this.peer) {
+            this.peer = new Peer(this.id, PeerConfig);
+        }
+
         return this.peer;
     }
 
     getCall(peerId, stream) {
         return this.peer.call(this.roomId + peerId, stream);
+    }
+
+    getRoomId() {
+        return this.roomId;
     }
 }
