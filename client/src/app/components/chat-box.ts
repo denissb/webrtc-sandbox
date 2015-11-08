@@ -36,15 +36,19 @@ export class ChatBoxComponent {
             this.connections.push(conn);
 
             conn.on('data', data => {
-                this.zone.run(() => {
-                    this.messages.push(`${conn.metadata.id}: ${data}`);
-                });
+                this.addMessage(conn.metadata.id, data);
             })
         });
     }
 
+    addMessage(author, msg) {
+        this.zone.run(() => {
+            this.messages.push(`${author}: ${msg}`);
+        });
+    }
+
     sendMessage(msg) {
-        this.messages.push(msg.value);
+        this.addMessage('You', msg.value);
         this.connections.forEach(conn => {
             conn.send(msg.value);
         });
