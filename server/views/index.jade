@@ -2,23 +2,10 @@ doctype html
 html
     head
         title PeerJS test
-        // script(src='/src/app.js')
         script(src='/src/system.js')
-        script(src='/src/angular2.dev.js')
         script(src='/config.js')
+        script(src='/src/angular2.dev.js')
         script.
-            System.import('lib/peerjs/peer.min');
             System.import('src/app/app');
     body
-        //
-            button#start START
-            button#fullScreen(style='display: none;') FULL SCREEN
-            hr
-            div
-                form(action='javascript:void(0);')
-                input#message(type='text', size='80')
-                button#send(type='submit') SEND
-            #chatBox
-            div#videoContainer
-            
         web-rtc-app

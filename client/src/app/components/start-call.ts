@@ -1,4 +1,4 @@
-import {Component, View, bootstrap} from 'angular2/angular2'
+import {Component, View} from 'angular2/angular2'
 import {ConnectService} from '../services/connect'
 import {APIService} from '../services/api'
 
@@ -6,7 +6,7 @@ import {APIService} from '../services/api'
     selector: 'start-call',
     template: `
         <div>
-            <button (click)='call()'>Call</button>
+            <button #status (click)='call(status)'>Call</button>
         </div>
         `
 })
@@ -19,14 +19,16 @@ export class StartCallComponent {
         this.apiService = apiService;
     }
 
-    call() {
+    call(status) {
         this.apiService.getPeers(this.connectService.getRoomId())
             .then(
             r => {
                 return r.json().then(data => {
                     this.connectService.start(data.peers);
+                    status.hidden = true;
                 }, err => {
                     alert('Sorry, something went wrong :/');
+                    status.hidden = false;
                 })
             },
             err => {

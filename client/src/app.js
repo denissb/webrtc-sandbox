@@ -51,8 +51,6 @@
 			});
 
 			conn.on('close', function() {
-				connections.splice(1, connections.indexOf(conn));
-				peerIds.splice(1, peerIds.indexOf(conn.metadata.id));
 				chatBox.innerHTML += '<p>' + conn.metadata.id + ' disconnected</p>';
 			});
 

@@ -1,10 +1,12 @@
-import {Inject} from 'angular2/core';
+import {Inject, EventEmitter} from 'angular2/angular2'
 import {PeerService} from './peer'
 import {NavigatorService} from './navigator'
 
 export class ConnectService {
     peerService: PeerService;
     navigatorService: NavigatorService;
+    dataEmitter: EventEmitter = new EventEmitter();
+    mediaEmitter: EventEmitter = new EventEmitter();
 
     constructor(@Inject(PeerService) peerService: PeerService,
         @Inject(NavigatorService) navigatorService: NavigatorService) {
@@ -14,18 +16,54 @@ export class ConnectService {
     }
 
     start(peers: Array<number>) {
-        this.peerService.getPeer();
+        this.acceptData();
 
-        // This is just temporary here
-        this.navigatorService.getUserMedia().then(function(stream) {
-            console.log(stream);
-        }, function(err) {
-            console.log(err);
+        peers.forEach(peerId => {
+            this.joinData(peerId);
+            //this.joinMedia(peerId)
+        })
+    }
+
+    private acceptData() {
+        var peer = this.peerService.getPeer();
+
+        peer.on('connection', conn => {
+            this.dataEmitter.next(conn);
+        });
+    }
+
+    /**
+      Emits a DataConnection from Peer.js
+    **/  
+    private joinData(peerId): any {
+        var connection = this.peerService.getConnection(peerId);
+
+        connection.on('open', () => {
+            this.dataEmitter.next(connection);
+        });
+    }
+
+    /**
+      Emits a MediaConnection from Peer.js
+    **/  
+    private joinMedia(peerId): any {
+        this.navigatorService.getUserMedia().then(stream => {
+            var call = this.peerService.getCall(peerId, stream);
+            call.on('stream', stream => {
+                this.mediaEmitter.next(stream);
+            })
+        }, err => {
+            console.error(err);
         });
 
-        console.log(peers);
+    }
 
-        //this.peerService.getConnect(peers[0]);
+    getDataStream(): any {
+        return this.dataEmitter.toRx();
+    }
+
+    getCallStream(): any {
+        return this.mediaEmitter.toRx();
     }
 
     getRoomId(): string {

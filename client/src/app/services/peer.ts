@@ -1,12 +1,13 @@
+import '/lib/peerjs/peer.min';
 import {PeerConfig} from '../config/peer';
 
 declare var Peer: any;
 
 export class PeerService {
-    private peer: any;
-    private roomId: string;
-    private userId: number;
-    private id: string;
+    peer: any;
+    roomId: string;
+    userId: number;
+    id: string;
 
     constructor() {
         this.roomId = location.pathname.slice(1);
@@ -17,18 +18,25 @@ export class PeerService {
     getPeer() {
         if (!this.peer) {
             this.peer = new Peer(this.id, PeerConfig);
+            this.bindEvents();
         }
 
         return this.peer;
     }
 
-    getCall(peerId, stream) {
+    bindEvents() {
+        this.peer.on('error', err => {
+            console.error(err);
+        });
+    }
+
+    getCall(peerId, stream): any {
         return this.peer.call(this.roomId + peerId, stream);
     }
 
-    getConnect(peerId) {
-        return this.peer.connect(this.roomId + this.userId, {
-            metadata: { 
+    getConnection(peerId): any {
+        return this.peer.connect(this.roomId + peerId, {
+            metadata: {
                 id: this.userId 
             }
         });
