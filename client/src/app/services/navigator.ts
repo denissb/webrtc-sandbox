@@ -22,7 +22,7 @@ export class NavigatorService {
                     resolve(stream);
                 },
                 error  => {
-                    resolve(error);
+                    reject(error);
                 });
         });
 

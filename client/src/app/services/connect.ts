@@ -17,13 +17,17 @@ export class ConnectService {
 
     start(peers: Array<number>) {
         this.acceptData();
+        this.acceptMedia();
 
         peers.forEach(peerId => {
             this.joinData(peerId);
-            //this.joinMedia(peerId)
+            this.joinMedia(peerId)
         })
     }
 
+    /**
+       Emits an accepted DataConnection  
+    **/   
     private acceptData() {
         var peer = this.peerService.getPeer();
 
@@ -44,6 +48,24 @@ export class ConnectService {
     }
 
     /**
+        Emits an accepted MediaConnection
+    **/
+    private acceptMedia() {
+        var peer = this.peerService.getPeer();
+        //TODO: re-factor
+        peer.on('call', call => {
+            this.navigatorService.getUserMedia().then(stream => {
+                call.answer(stream);
+                call.on('stream', stream => {
+                    this.mediaEmitter.next(stream);
+                });
+            }, err => {
+                console.error(err);
+            });
+        });
+    }
+
+    /**
       Emits a MediaConnection from Peer.js
     **/  
     private joinMedia(peerId): any {
@@ -55,7 +77,6 @@ export class ConnectService {
         }, err => {
             console.error(err);
         });
-
     }
 
     getDataStream(): any {
@@ -69,5 +90,4 @@ export class ConnectService {
     getRoomId(): string {
         return this.peerService.getRoomId();
     }
-
 }

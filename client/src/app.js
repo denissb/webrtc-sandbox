@@ -76,13 +76,10 @@
 			});
 
 			conn.on('open', function() {
-
 				chatBox.innerHTML += '<p>You joined ' + peerId + '</p>';
-
 				conn.on('data', function(data) {
 					chatBox.innerHTML += '<p>' + peerId + ': '+ data + '</p>';
 				});
-
 				document.getElementById('send').addEventListener('click', function() {
 					conn.send(messageFiled.value);
 				});
