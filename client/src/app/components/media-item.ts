@@ -1,4 +1,4 @@
-import {Component, View, CORE_DIRECTIVES} from 'angular2/angular2'
+import {Component, View, CORE_DIRECTIVES, ElementRef} from 'angular2/angular2'
 import {MediaStream} from '../models/media-stream'
 
 @Component({
@@ -12,8 +12,11 @@ import {MediaStream} from '../models/media-stream'
     ]
 })
 export class MediaItemComponent {
+    videoElement: any;
     media: MediaStream;
 
-    constructor() {
+    constructor(element: ElementRef) {
+        this.videoElement = element.nativeElement.children[0];
     }
+
 }

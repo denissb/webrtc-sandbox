@@ -6,12 +6,12 @@ declare var Peer: any;
 export class PeerService {
     peer: any;
     roomId: string;
-    userId: number;
+    userId: string;
     id: string;
 
     constructor() {
         this.roomId = location.pathname.slice(1);
-        this.userId = Math.floor(Math.random() * 100000),
+        this.userId = Math.floor(Math.random() * 16777215).toString(16), // Kudos to Paul Irish
         this.id = this.roomId + this.userId;
     }
 

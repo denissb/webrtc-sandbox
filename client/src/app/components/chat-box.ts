@@ -30,12 +30,11 @@ export class ChatBoxComponent {
         this.connectService = connectService;
 
         this.connectService.getDataStream().subscribe(conn => {
-            // Start using the connection
-            console.log(conn.peer);
             this.connections.push(conn);
 
             conn.on('data', data => {
-                this.addMessage(conn.metadata.id, data);
+                let author = conn.peer.slice(16);
+                this.addMessage(author, data);
             })
         });
     }
