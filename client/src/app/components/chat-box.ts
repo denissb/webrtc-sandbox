@@ -47,10 +47,13 @@ export class ChatBoxComponent {
         });
     }
 
-    sendMessage(msg) {
-        this.addMessage('You', msg.value);
+    sendMessage(msgInput) {
+        let msg = msgInput.value;
+        msgInput.value = '';
+        this.addMessage('You', msg);
+        
         this.connections.forEach(conn => {
-            conn.send(msg.value);
+            conn.send(msg);
         });
     }
 
