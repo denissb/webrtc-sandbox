@@ -1,5 +1,6 @@
 declare var navigator: any;
 declare var MediaDevices: any;
+declare var window: any;
 
 export class NavigatorService {
 
@@ -27,5 +28,10 @@ export class NavigatorService {
         });
 
         return streamPromise;    
+    }
+
+    createObjectURL(stream): string {
+        let windowURL = window.URL || window.webkitURL;
+        return windowURL.createObjectURL(stream);
     }
 }

@@ -1,5 +1,4 @@
 import {Component, bootstrap, CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/angular2';
-import {Budd} from './models/budd'
 import {ConnectService} from './services/connect'
 import {PeerService} from './services/peer'
 import {APIService} from './services/api'
@@ -8,6 +7,7 @@ import {NavigatorService} from './services/navigator'
 // Components
 import {StartCallComponent} from './components/start-call'
 import {ChatBoxComponent} from './components/chat-box'
+import {MediaBoxComponent} from './components/media-box'
 
 @Component({
     selector: 'web-rtc-app',
@@ -16,7 +16,8 @@ import {ChatBoxComponent} from './components/chat-box'
         CORE_DIRECTIVES,
         FORM_DIRECTIVES,
         StartCallComponent,
-        ChatBoxComponent
+        ChatBoxComponent,
+        MediaBoxComponent
         ]
 })
 class WebRTCAppComponent {
