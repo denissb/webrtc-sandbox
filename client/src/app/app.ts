@@ -8,6 +8,7 @@ import {NavigatorService} from './services/navigator'
 import {StartCallComponent} from './components/start-call'
 import {ChatBoxComponent} from './components/chat-box'
 import {MediaBoxComponent} from './components/media-box'
+import {MediaItemComponent} from './components/media-item'
 
 @Component({
     selector: 'web-rtc-app',
@@ -17,7 +18,8 @@ import {MediaBoxComponent} from './components/media-box'
         FORM_DIRECTIVES,
         StartCallComponent,
         ChatBoxComponent,
-        MediaBoxComponent
+        MediaBoxComponent,
+        MediaItemComponent
         ]
 })
 class WebRTCAppComponent {

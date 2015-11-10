@@ -3,7 +3,6 @@ import {ConnectService} from '../services/connect'
 
 @Component({
     selector: 'chat-box',
-    properties: ['messages'],
     template: `
         <div>
             <h2>Messages:</h2>

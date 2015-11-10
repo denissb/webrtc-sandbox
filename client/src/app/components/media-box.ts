@@ -2,27 +2,25 @@ import {Component, View, CORE_DIRECTIVES, FORM_DIRECTIVES, NgZone} from 'angular
 import {ConnectService} from '../services/connect'
 import {NavigatorService} from '../services/navigator'
 import {MediaStream} from '../models/media-stream'
+import {MediaItemComponent} from './media-item'
 
 @Component({
     selector: 'media-box',
-    properties: ['messages'],
     template: `
-        <div>
-            <div *ng-for="#stream of streams">
-                <video [model]="video" src="{{stream.url}}">
-                </video>
-            </div>
+        <div *ng-for="#mediaStream of mediaStreams">
+            <media-item [media]="mediaStream"></media-item>
         </div>
         `,
     directives: [
         CORE_DIRECTIVES,
-        FORM_DIRECTIVES
+        FORM_DIRECTIVES,
+        MediaItemComponent
     ]
 })
 export class MediaBoxComponent {
     connectService: ConnectService;
     navigatorService: NavigatorService;
-    streams: Array<MediaStream> = [];
+    mediaStreams: Array<MediaStream> = [];
     zone: NgZone;
 
     constructor(connectService: ConnectService, navigatorService: NavigatorService, zone: NgZone) {
@@ -37,11 +35,10 @@ export class MediaBoxComponent {
 
     private addMediaStream(stream) {
         let callURL = this.navigatorService.createObjectURL(stream);
-        let mediaStream: MediaStream = new MediaStream(callURL, true);
+        let mediaStream: MediaStream = new MediaStream(callURL, true, stream);
 
-        console.log(mediaStream);
         this.zone.run(() => {
-            this.streams.push(mediaStream);
+            this.mediaStreams.push(mediaStream);
         });
     }
 
