@@ -5,8 +5,9 @@
   "main": "server/index.js",
   "scripts": {
     "start": "node ./server/index.js",
-    "tsc": "tsc -p client/src/app -w --emitDecoratorMetadata",
-    "dev": "nodemon ./server/index.js"
+    "build": "gulp scripts",
+    "dev": "nodemon ./server/index.js",
+    "watch": "gulp watch"
   },
   "keywords": [
     "webrtc",
