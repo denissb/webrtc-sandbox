@@ -1,6 +1,6 @@
 System.config({
     packages: {
-        'src/app': {
+        'dist': {
             defaultExtension: 'js'
         },
         'lib': {

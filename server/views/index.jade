@@ -2,10 +2,10 @@ doctype html
 html
     head
         title PeerJS test
-        script(src='/src/system.js')
+        script(src='/lib/system.js')
         script(src='/config.js')
-        script(src='/src/angular2.dev.js')
+        script(src='/lib/angular2.dev.js')
         script.
-            System.import('src/app/app');
+            System.import('/dist/app');
     body
         web-rtc-app
