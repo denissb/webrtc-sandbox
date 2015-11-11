@@ -5,7 +5,7 @@ import {MediaStream} from '../models/media-stream'
     selector: 'media-item',
     properties: ['media'],
     template: `
-        <video src="{{media.url}}"></video>
+        <video controls src={{media.url}}></video>
         `,
     directives: [
         CORE_DIRECTIVES
@@ -19,4 +19,10 @@ export class MediaItemComponent {
         this.videoElement = element.nativeElement.children[0];
     }
 
+    onInit() {
+        // Binding to video events - maybe this should be encapsulated?
+        this.videoElement.addEventListener('canplay', () => {
+            this.videoElement.play();
+        });
+    }
 }
