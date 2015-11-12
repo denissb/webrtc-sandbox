@@ -21,7 +21,7 @@ app.set('views', serverPath + '/views');
 app.set('view engine', 'jade');
 app.use(express.static(serverPath + '/../client'));
 
-console.log('Listening on port', port);
+console.info('Listening on port', port);
 
 app.get('/', function (req, res) {
 	var randomPeerId = (Math.random().toString(36) + '0000000000000000000').substr(2, 16);
@@ -51,9 +51,9 @@ peerServer.on('connection', function (id) {
       roomId = id.slice(0, 16);
 
   peerRooms.add(roomId, peerId);
-  console.log('User connected with #', id);
+  console.info('User connected with #', id);
 
-  console.log(peerRooms.getPeers(roomId));
+  console.info(peerRooms.getPeers(roomId));
 });
 
 peerServer.on('disconnect', function (id) {
@@ -62,5 +62,5 @@ peerServer.on('disconnect', function (id) {
 
   peerRooms.remove(roomId, peerId);
 
-  console.log('User disconnected with #', id);
+  console.info('User disconnected with #', id);
 });
