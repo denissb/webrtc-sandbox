@@ -3,17 +3,7 @@ import {ConnectService} from '../services/connect'
 
 @Component({
     selector: 'chat-box',
-    template: `
-        <div>
-            <h2>Messages:</h2>
-            <div *ng-for="#msg of messages">
-                <div>{{msg}}</div>
-            </div>
-            <input #msg
-            (keyup.enter)="sendMessage(msg)">
-            <button (click)="sendMessage(msg)">Send</button>
-        </div>
-        `,
+    templateUrl: './src/app/templates/chat-box.html',
     directives: [
         CORE_DIRECTIVES,
         FORM_DIRECTIVES

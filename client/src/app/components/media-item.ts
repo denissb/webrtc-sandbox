@@ -5,7 +5,7 @@ import {MediaStream} from '../models/media-stream'
     selector: 'media-item',
     properties: ['media'],
     template: `
-        <video loop autoplay="true" controls src={{media.url}}></video>
+        <video controls src={{media.url}}></video>
         `,
     directives: [
         CORE_DIRECTIVES
