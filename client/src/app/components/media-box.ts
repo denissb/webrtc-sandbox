@@ -7,9 +7,8 @@ import {MediaItemComponent} from './media-item'
 @Component({
     selector: 'media-box',
     template: `
-        <div *ng-for="#mediaStream of mediaStreams">
-            <media-item [media]="mediaStream"></media-item>
-        </div>
+        <media-item *ng-for="#mediaStream of mediaStreams"
+            [media]="mediaStream"></media-item>
         `,
     directives: [
         CORE_DIRECTIVES,

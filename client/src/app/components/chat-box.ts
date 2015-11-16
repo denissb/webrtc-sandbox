@@ -20,7 +20,10 @@ export class ChatBoxComponent {
         this.connectService = connectService;
 
         this.connectService.getDataStream().subscribe(conn => {
-            this.connections.push(conn);
+            // Running it in a zone makes the UI update faster
+            this.zone.run(() => {
+                this.connections.push(conn);
+            });
 
             conn.on('data', data => {
                 let author = conn.peer.slice(16);

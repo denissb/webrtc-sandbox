@@ -5,9 +5,7 @@ import {APIService} from '../services/api'
 @Component({
     selector: 'start-call',
     template: `
-        <div>
-            <button #status (click)='call(status)'>Call</button>
-        </div>
+        <button #status (click)='call(status)'>Call</button>
         `
 })
 export class StartCallComponent {
@@ -21,8 +19,7 @@ export class StartCallComponent {
 
     call(status) {
         this.apiService.getPeers(this.connectService.getRoomId())
-            .then(
-            r => {
+            .then(r => {
                 return r.json().then(data => {
                     this.connectService.start(data.peers);
                     status.hidden = true;
@@ -30,10 +27,8 @@ export class StartCallComponent {
                     alert('Sorry, something went wrong :/');
                     status.hidden = false;
                 })
-            },
-            err => {
+            }, err => {
                 alert('Sorry, an error occured while retreving the peer list!')
-            }
-            );
+            });
     }
 }
