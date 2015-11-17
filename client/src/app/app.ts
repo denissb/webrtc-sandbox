@@ -13,6 +13,7 @@ import {MediaItemComponent} from './components/media-item'
 @Component({
     selector: 'web-rtc-app',
     templateUrl: '/src/app/templates/web-rtc-app.html',
+    styleUrls: ['dist/css/components/web-rtc-app.css'],
     directives: [
         CORE_DIRECTIVES,
         FORM_DIRECTIVES,

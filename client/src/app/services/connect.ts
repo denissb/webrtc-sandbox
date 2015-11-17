@@ -5,8 +5,8 @@ import {NavigatorService} from './navigator'
 export class ConnectService {
     peerService: PeerService;
     navigatorService: NavigatorService;
-    dataEmitter: EventEmitter = new EventEmitter();
-    mediaEmitter: EventEmitter = new EventEmitter();
+    dataEmitter: EventEmitter<any> = new EventEmitter();
+    mediaEmitter: EventEmitter<any> = new EventEmitter();
 
     constructor(@Inject(PeerService) peerService: PeerService,
         @Inject(NavigatorService) navigatorService: NavigatorService) {
@@ -80,11 +80,11 @@ export class ConnectService {
     }
 
     getDataStream(): any {
-        return this.dataEmitter.toRx();
+        return this.dataEmitter;
     }
 
     getCallStream(): any {
-        return this.mediaEmitter.toRx();
+        return this.mediaEmitter;
     }
 
     getRoomId(): string {
