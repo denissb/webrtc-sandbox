@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
     ts = require('gulp-typescript')
-    postcss = require('gulp-postcss');
+    postcss = require('gulp-postcss'),
+    nodemon = require('gulp-nodemon');
 
 /* PostCSS plugins */ 
 
@@ -9,6 +10,7 @@ var autoprefixer = require('autoprefixer'),
     precss = require('precss');
 
 var config = {
+    serverSrc: 'server',
     clientSrc: 'client/src/app',
     clientOut: 'client/dist/js',
     styleSrc: 'client/styles',
@@ -37,7 +39,16 @@ gulp.task('css', function () {
         .pipe(gulp.dest(config.styleOut));
 });
 
-gulp.task('watch', ['scripts', 'css'], function() {
+gulp.task('dev', ['scripts', 'css'], function() {
+    nodemon({ 
+        script: config.serverSrc + '/index.js',
+        ext: 'jade js',
+        ignore: ['client']
+    })
+    .on('restart', function() {
+        console.log('Server restarted!')
+    });
+
     gulp.watch(config.clientSrc + '/**/*.ts', ['scripts']);
     gulp.watch(config.styleSrc + '/**/*.css', ['css']);
 });
