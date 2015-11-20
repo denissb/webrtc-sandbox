@@ -1,7 +1,8 @@
 var gulp = require('gulp'),
     ts = require('gulp-typescript')
     postcss = require('gulp-postcss'),
-    nodemon = require('gulp-nodemon');
+    nodemon = require('gulp-nodemon'),
+    livereload = require('gulp-livereload');
 
 /* PostCSS plugins */ 
 
@@ -24,6 +25,7 @@ gulp.task('scripts', function() {
         .pipe(ts(tsProject));
 
     tsResult.js.pipe(gulp.dest(config.clientOut))
+        .pipe(livereload.reload());
 });
 
 gulp.task('css', function () {
@@ -36,7 +38,8 @@ gulp.task('css', function () {
 
     return gulp.src(config.styleSrc + '/**/*.css')
         .pipe(postcss(processors))
-        .pipe(gulp.dest(config.styleOut));
+        .pipe(gulp.dest(config.styleOut))
+        .pipe(livereload.reload());
 });
 
 gulp.task('dev', ['scripts', 'css'], function() {
@@ -48,6 +51,8 @@ gulp.task('dev', ['scripts', 'css'], function() {
     .on('restart', function() {
         console.log('Server restarted!')
     });
+
+    livereload.listen();
 
     gulp.watch(config.clientSrc + '/**/*.ts', ['scripts']);
     gulp.watch(config.styleSrc + '/**/*.css', ['css']);

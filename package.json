@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./server/index.js",
     "build": "gulp scripts",
-    "dev": "gulp dev"
+    "dev": "NODE_ENV=development gulp dev"
   },
   "keywords": [
     "webrtc",
