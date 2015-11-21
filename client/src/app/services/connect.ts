@@ -7,6 +7,7 @@ export class ConnectService {
     navigatorService: NavigatorService;
     dataEmitter: EventEmitter<any> = new EventEmitter();
     mediaEmitter: EventEmitter<any> = new EventEmitter();
+    closeEmmiter: EventEmitter<any> = new EventEmitter();
 
     constructor(@Inject(PeerService) peerService: PeerService,
         @Inject(NavigatorService) navigatorService: NavigatorService) {
@@ -57,7 +58,7 @@ export class ConnectService {
             this.navigatorService.getUserMedia().then(stream => {
                 call.answer(stream);
                 call.on('stream', stream => {
-                    this.mediaEmitter.next(stream);
+                    this.emmitMediaStream(stream);
                 });
             }, err => {
                 console.error(err);
@@ -72,10 +73,19 @@ export class ConnectService {
         this.navigatorService.getUserMedia().then(stream => {
             var call = this.peerService.getCall(peerId, stream);
             call.on('stream', stream => {
-                this.mediaEmitter.next(stream);
+                this.emmitMediaStream(stream);
             });
         }, err => {
             console.error(err);
+        });
+    }
+
+    private emmitMediaStream(stream) {
+        this.mediaEmitter.next(stream);
+
+        // TODO: implement a faster way to detect a disconnected user
+        stream.addEventListener("ended", (e) => {
+            this.closeEmmiter.next(e.currentTarget);
         });
     }
 
@@ -85,6 +95,10 @@ export class ConnectService {
 
     getCallStream(): any {
         return this.mediaEmitter;
+    }
+
+    getCloseStream(): any {
+        return this.closeEmmiter;
     }
 
     getRoomId(): string {
