@@ -5,7 +5,7 @@ import {MediaStream} from '../models/media-stream'
     selector: 'media-item',
     properties: ['media'],
     template: `
-        <video controls src={{media.url}}></video>
+        <video controls src={{media.url}} [hidden]='visible'></video>
         `,
     directives: [
         CORE_DIRECTIVES
@@ -14,15 +14,18 @@ import {MediaStream} from '../models/media-stream'
 export class MediaItemComponent {
     videoElement: any;
     media: MediaStream;
+    hidden: boolean;
 
     constructor(element: ElementRef) {
         this.videoElement = element.nativeElement.children[0];
+        this.hidden = true;
     }
 
     onInit() {
         // Binding to video events - maybe this should be encapsulated?
         this.videoElement.addEventListener('canplay', (e) => {
             this.videoElement.play();
+            this.hidden = false;
         });
 
         // HACK: There is a problem with the video pausing after more than 1 peer is connected

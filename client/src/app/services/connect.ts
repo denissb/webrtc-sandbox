@@ -73,7 +73,7 @@ export class ConnectService {
             var call = this.peerService.getCall(peerId, stream);
             call.on('stream', stream => {
                 this.mediaEmitter.next(stream);
-            })
+            });
         }, err => {
             console.error(err);
         });

@@ -36,9 +36,29 @@ export class MediaBoxComponent {
         let callURL = this.navigatorService.createObjectURL(stream);
         let mediaStream: MediaStream = new MediaStream(callURL, true, stream);
 
+        // When the stream ends we remove it from the list
+        // TODO: create an event emmiter in the service for this
+        stream.addEventListener("ended", (e) => {
+            this.removeMediaStream(e.currentTarget);
+        });
+
         this.zone.run(() => {
             this.mediaStreams.push(mediaStream);
         });
     }
 
+    // Removes a stream by reference
+    // TODO: implement a faster way to detect a disconnected user
+    private removeMediaStream(stream) {
+        for (var i = 0; i < this.mediaStreams.length; i++) {
+            if (this.mediaStreams[i].stream.id === stream.id) {
+                this.zone.run(() => {
+                    this.mediaStreams.splice(i, 1);
+                });
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
