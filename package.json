@@ -5,7 +5,7 @@
   "main": "server/index.js",
   "scripts": {
     "start": "node ./server/index.js",
-    "build": "gulp scripts",
+    "build": "gulp build",
     "dev": "NODE_ENV=development gulp dev"
   },
   "keywords": [

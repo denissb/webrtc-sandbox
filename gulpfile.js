@@ -25,7 +25,7 @@ gulp.task('scripts', function() {
         .pipe(ts(tsProject));
 
     tsResult.js.pipe(gulp.dest(config.clientOut))
-        .pipe(livereload.reload());
+        .pipe(livereload());
 });
 
 gulp.task('css', function () {
@@ -36,13 +36,16 @@ gulp.task('css', function () {
         precss
     ];
 
-    return gulp.src(config.styleSrc + '/**/*.css')
+    gulp.src(config.styleSrc + '/**/*.css')
         .pipe(postcss(processors))
-        .pipe(gulp.dest(config.styleOut))
-        .pipe(livereload.reload());
+        .pipe(gulp.dest(config.styleOut));
 });
 
-gulp.task('dev', ['scripts', 'css'], function() {
+gulp.task('build', ['scripts', 'css']);
+
+gulp.task('dev', ['build'], function() {
+    livereload.listen();
+
     nodemon({ 
         script: config.serverSrc + '/index.js',
         ext: 'jade js',
@@ -52,8 +55,9 @@ gulp.task('dev', ['scripts', 'css'], function() {
         console.log('Server restarted!')
     });
 
-    livereload.listen();
-
     gulp.watch(config.clientSrc + '/**/*.ts', ['scripts']);
-    gulp.watch(config.styleSrc + '/**/*.css', ['css']);
+    // Streams do not work here properly so a callback is used
+    gulp.watch(config.styleSrc + '/**/*.css', ['css', function() {
+        livereload.reload();
+    }]);
 });
