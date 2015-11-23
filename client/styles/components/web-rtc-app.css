@@ -19,10 +19,18 @@
   }
 
   .right-part {
-    
+    align-items: stretch;
+    flex-flow: column;
+    display: flex;
+
+    chat-box {
+        flex: 1;
+    }
   }
 
   .big-part {
-
+    align-items: stretch;
+    flex-flow: column;
+    flex: 1;
   }
 }

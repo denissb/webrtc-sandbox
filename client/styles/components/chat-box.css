@@ -1,5 +1,6 @@
 .chat-box {
     margin: 1em;
+    align-items: stretch;
 
     .messages {
         background: #fff;
