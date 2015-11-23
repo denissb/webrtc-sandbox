@@ -25,6 +25,7 @@ import {MediaItemComponent} from './components/media-item'
 })
 class WebRTCAppComponent {
     public title = 'WebRTC app';
+    public status = 'pre-alpha';
 
     constructor() { }
 }

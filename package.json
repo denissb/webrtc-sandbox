@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./server/index.js",
     "build": "gulp build",
-    "dev": "NODE_ENV=development gulp dev"
+    "dev": "gulp dev"
   },
   "keywords": [
     "webrtc",
@@ -27,6 +27,7 @@
     "angular2": "^2.0.0-alpha.46",
     "autoprefixer": "^6.1.0",
     "cssnext": "^1.8.4",
+    "gulp-livereload": "^3.8.1",
     "gulp-nodemon": "^2.0.4",
     "gulp-postcss": "^6.0.1",
     "postcss": "^5.0.12",

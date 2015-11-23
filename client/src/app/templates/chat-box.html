@@ -1,9 +1,9 @@
 <div *ng-if="connections.length > 0" class='chat-box'>
     <h2>Messages:</h2>
-    <div *ng-for="#msg of messages">
-        <div>{{msg}}</div>
-    </div>
     <input #msg
     (keyup.enter)="sendMessage(msg)">
     <button (click)="sendMessage(msg)">Send</button>
+    <div *ng-for="#msg of messages" class='messages'>
+        <div>{{msg}}</div>
+    </div>
 </div>

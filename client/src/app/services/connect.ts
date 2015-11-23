@@ -23,7 +23,10 @@ export class ConnectService {
         peers.forEach(peerId => {
             this.joinData(peerId);
             this.joinMedia(peerId)
-        })
+        });
+
+        // When the page is closed or navigated way from, we close the connection - useless?
+        this.navigatorService.setBeforeUnload(this.closePeerConnection);
     }
 
     /**
@@ -72,6 +75,7 @@ export class ConnectService {
     private joinMedia(peerId): any {
         this.navigatorService.getUserMedia().then(stream => {
             var call = this.peerService.getCall(peerId, stream);
+
             call.on('stream', stream => {
                 this.emmitMediaStream(stream);
             });
@@ -84,9 +88,13 @@ export class ConnectService {
         this.mediaEmitter.next(stream);
 
         // TODO: implement a faster way to detect a disconnected user
-        stream.addEventListener("ended", (e) => {
+        stream.addEventListener("ended", e => {
             this.closeEmmiter.next(e.currentTarget);
         });
+    }
+
+    private closePeerConnection(e) {
+        this.peerService.destroyPeer();
     }
 
     getDataStream(): any {

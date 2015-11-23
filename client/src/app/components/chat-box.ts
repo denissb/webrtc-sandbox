@@ -4,6 +4,7 @@ import {ConnectService} from '../services/connect'
 @Component({
     selector: 'chat-box',
     templateUrl: './src/app/templates/chat-box.html',
+    styleUrls: ['dist/css/components/chat-box.css'],
     directives: [
         CORE_DIRECTIVES,
         FORM_DIRECTIVES

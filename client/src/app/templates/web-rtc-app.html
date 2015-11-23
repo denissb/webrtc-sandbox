@@ -1,8 +1,13 @@
 <div class='web-rtc-app'>
-    <h1>{{title}}</h1>
-    <div>
-        <start-call></start-call>
+    <div class='right-part'>
+        <h1>
+            {{title}}
+            <span>{{status}}</span>
+        </h1>
         <chat-box></chat-box>
+    </div>
+    <div class='big-part'>
+        <start-call></start-call>
         <media-box></media-box>
      </div>
  </div>

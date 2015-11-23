@@ -4,8 +4,9 @@ import {APIService} from '../services/api'
 
 @Component({
     selector: 'start-call',
+    styleUrls: ['dist/css/components/start-call.css'],
     template: `
-        <button #status (click)='call(status)'>Call</button>
+        <button class='start-call' #status (click)='call(status)'>START</button>
         `
 })
 export class StartCallComponent {

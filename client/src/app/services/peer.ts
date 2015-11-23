@@ -24,6 +24,10 @@ export class PeerService {
         return this.peer;
     }
 
+    destroyPeer() {
+        this.peer.destroy();
+    }
+
     bindEvents() {
         this.peer.on('error', err => {
             console.error(err);

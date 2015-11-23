@@ -34,4 +34,10 @@ export class NavigatorService {
         let windowURL = window.URL || window.webkitURL;
         return windowURL.createObjectURL(stream);
     }
+
+    setBeforeUnload(callback: Function) {
+        window.addEventListener('beforeunload', (e) => {
+            callback(e);
+        });
+    }
 }
