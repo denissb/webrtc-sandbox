@@ -41,6 +41,8 @@ table {
 
 /* Main stylesheet with reset and utils */
 
-body {
+* {
   color: #222;
+  font-family: Calibri;
+  word-wrap: break-word;
 }

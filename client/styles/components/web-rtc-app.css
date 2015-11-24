@@ -1,5 +1,4 @@
 .web-rtc-app {
-  font-family: Calibri;
   width: 100vw;
   height: 100vh;
   background: #e8e8e8;
@@ -8,7 +7,7 @@
 
   h1 {
     font-size: 2.2em;
-    margin: 0.4em 0.4em 1em;
+    margin: 0.4em 0.6em;
 
     span {
         font-size: 0.4em;
@@ -18,7 +17,8 @@
     }
   }
 
-  .right-part {
+  .small-part {
+    width: 300px;
     align-items: stretch;
     flex-flow: column;
     display: flex;

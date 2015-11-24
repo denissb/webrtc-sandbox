@@ -2,13 +2,12 @@
     position: fixed;
     left: 50%;
     top: 50%;
-    font-size: 1.8em;
+    font-size: 2em;
     margin-top: -2em;
     margin-left: -2em;
     background: #00f200;
     border: none;
     border-radius: 50%;
-    color: #222;
     width: 4em;
     height: 4em;
     cursor: pointer;

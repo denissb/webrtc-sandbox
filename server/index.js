@@ -7,6 +7,7 @@ var fs = require('fs'),
     serverPath = path.resolve(__dirname),
     rooms = require('./modules/rooms'),
     isDev = (process.env.NODE_ENV === 'development') ? true : false;
+    isTest = (process.env.NODE_ENV === 'test') ? true: false; 
 
 var options = {
     key: fs.readFileSync(process.env.SSL_KEY_PATH || serverPath +'/ssl/webrtc.key'),
@@ -14,7 +15,7 @@ var options = {
 };
 
 var peerRooms = rooms();
-if (isDev) {
+if (isDev || isTest) {
   var http = require('http');
   http.createServer(app).listen(port);
   app.use(require('connect-livereload')());
@@ -50,7 +51,7 @@ app.get('/api/room/:id', function (req, res) {
 var peerServer = PeerServer({
     port: 9000, path: '/connect', 
     proxied: true,
-    ssl: (isDev) ? undefined : options
+    ssl: (isDev || isTest) ? undefined : options
   });
 
 peerServer.on('connection', function (id) {
