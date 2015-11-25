@@ -1,0 +1,10 @@
+.media-box {
+    display: flex;
+    align-items: center;
+
+    h2 {
+        font-size: 1.4em;
+        margin: 1em;
+        text-align: center;
+    }
+}

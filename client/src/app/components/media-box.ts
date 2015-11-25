@@ -6,9 +6,13 @@ import {MediaItemComponent} from './media-item'
 
 @Component({
     selector: 'media-box',
+    styleUrls: ['dist/css/components/media-box.css'],
     template: `
-        <media-item *ng-for="#mediaStream of mediaStreams"
-            [media]="mediaStream"></media-item>
+        <div class="media-box">
+            <h2 *ng-if="isOpen && mediaStreams.length === 0">No peers connected</h2>
+            <media-item *ng-for="#mediaStream of mediaStreams"
+                [media]="mediaStream"></media-item>
+        </div>    
         `,
     directives: [
         CORE_DIRECTIVES,
@@ -17,10 +21,12 @@ import {MediaItemComponent} from './media-item'
     ]
 })
 export class MediaBoxComponent {
-    connectService: ConnectService;
-    navigatorService: NavigatorService;
-    mediaStreams: Array<MediaStream> = [];
-    zone: NgZone;
+    private connectService: ConnectService;
+    private navigatorService: NavigatorService;
+    private mediaStreams: Array<MediaStream> = [];
+    private zone: NgZone;
+    private ownId: string;
+    private isOpen: boolean;
 
     constructor(connectService: ConnectService, navigatorService: NavigatorService, zone: NgZone) {
         this.navigatorService = navigatorService;
@@ -33,6 +39,15 @@ export class MediaBoxComponent {
 
         this.connectService.getCloseStream().subscribe(stream => {
             this.removeMediaStream(stream);
+        });
+
+        this.connectService.getStatusStream().subscribe(id => {
+            this.ownId = id;
+
+            //HACK - otherwise the message with no peers flashes until we recive the first handshake
+            setTimeout(() => {
+                this.isOpen = true;
+            }, 400);
         });
     }
 

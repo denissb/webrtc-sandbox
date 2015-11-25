@@ -5,8 +5,8 @@ declare var Peer: any;
 
 export class PeerService {
     peer: any;
-    roomId: string;
-    userId: string;
+    private static roomId: string;
+    private static userId: string;
     id: string;
 
     constructor() {
@@ -15,7 +15,7 @@ export class PeerService {
         this.id = this.roomId + this.userId;
     }
 
-    getPeer() {
+    getPeer(): any {
         if (!this.peer) {
             this.peer = new Peer(this.id, PeerConfig);
             this.bindEvents();
@@ -28,7 +28,7 @@ export class PeerService {
         this.peer.destroy();
     }
 
-    bindEvents() {
+    private bindEvents() {
         this.peer.on('error', err => {
             console.error(err);
         });
@@ -48,5 +48,9 @@ export class PeerService {
 
     getRoomId(): string {
         return this.roomId;
+    }
+
+    getUserId(): string {
+        return this.userId;
     }
 }

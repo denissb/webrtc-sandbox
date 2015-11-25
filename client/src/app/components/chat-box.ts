@@ -12,14 +12,19 @@ import {Message} from '../models/message'
     ]    
 })
 export class ChatBoxComponent {
-    connectService: ConnectService;
-    connections: Array<any> = [];
-    messages: Array<Message> = [];
-    zone: NgZone;
+    private connectService: ConnectService;
+    private connections: Array<any> = [];
+    private messages: Array<Message> = [];
+    private zone: NgZone;
+    private ownId: string;
 
     constructor(connectService: ConnectService, zone: NgZone) {
         this.zone = zone;
         this.connectService = connectService;
+
+        this.connectService.getStatusStream().subscribe(id => {
+            this.ownId = id;
+        });
 
         this.connectService.getDataStream().subscribe(conn => {
             // Running it in a zone makes the UI update faster
@@ -44,7 +49,7 @@ export class ChatBoxComponent {
     sendMessage(msgInput) {
         let msg = msgInput.value;
         msgInput.value = '';
-        this.addMessage('222', msg);
+        this.addMessage(this.ownId, msg);
         
         this.connections.forEach(conn => {
             conn.send(msg);

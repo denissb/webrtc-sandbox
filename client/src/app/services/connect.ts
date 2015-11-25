@@ -5,6 +5,7 @@ import {NavigatorService} from './navigator'
 export class ConnectService {
     peerService: PeerService;
     navigatorService: NavigatorService;
+    statusEmmiter: EventEmitter<any> = new EventEmitter();
     dataEmitter: EventEmitter<any> = new EventEmitter();
     mediaEmitter: EventEmitter<any> = new EventEmitter();
     closeEmmiter: EventEmitter<any> = new EventEmitter();
@@ -34,6 +35,10 @@ export class ConnectService {
     **/   
     private acceptData() {
         var peer = this.peerService.getPeer();
+
+        peer.on('open', id => {
+            this.statusEmmiter.next(this.peerService.getUserId());
+        });
 
         peer.on('connection', conn => {
             this.dataEmitter.next(conn);
@@ -107,6 +112,10 @@ export class ConnectService {
 
     getCloseStream(): any {
         return this.closeEmmiter;
+    }
+
+    getStatusStream(): any {
+        return this.statusEmmiter;
     }
 
     getRoomId(): string {
