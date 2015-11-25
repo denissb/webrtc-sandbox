@@ -5,8 +5,8 @@ declare var Peer: any;
 
 export class PeerService {
     peer: any;
-    private static roomId: string;
-    private static userId: string;
+    roomId: string;
+    userId: string;
     id: string;
 
     constructor() {
