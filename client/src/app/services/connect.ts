@@ -66,6 +66,8 @@ export class ConnectService {
             this.navigatorService.getUserMedia().then(stream => {
                 call.answer(stream);
                 call.on('stream', stream => {
+                    // HACK: Hijacking a property
+                    stream.peer = call.peer;
                     this.emmitMediaStream(stream);
                 });
             }, err => {
@@ -82,6 +84,8 @@ export class ConnectService {
             var call = this.peerService.getCall(peerId, stream);
 
             call.on('stream', stream => {
+                // HACK: Hijacking a property
+                stream.peer = call.peer;
                 this.emmitMediaStream(stream);
             });
         }, err => {
