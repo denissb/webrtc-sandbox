@@ -8,7 +8,8 @@ import {MediaStream} from '../models/media-stream'
     template: `
         <div [ng-class]="classMap"></div>
         <video controls 
-        src={{media.url}} [hidden]='visible'></video>
+		class="media-item" src={{media.url}} [hidden]='visible'>
+        </video>
         `,
     directives: [
         CORE_DIRECTIVES,
@@ -22,7 +23,7 @@ export class MediaItemComponent {
     classMap: Object;
 
     constructor(element: ElementRef) {
-        this.videoElement = element.nativeElement.children[0];
+        this.videoElement = element.nativeElement.children[1];
         this.classMap = {
             'no-video': false, 
             'no-audio': false
@@ -38,7 +39,6 @@ export class MediaItemComponent {
             this.hidden = false;
         });
 
-        console.log(this.media.userId);
         //Setting color
         this.videoElement.style.background = this.media.userId;
 
