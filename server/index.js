@@ -18,7 +18,9 @@ var peerRooms = rooms();
 if (isDev || isTest) {
   var http = require('http');
   http.createServer(app).listen(port);
-  app.use(require('connect-livereload')());
+  if(isDev) {
+    app.use(require('connect-livereload')());
+  }
 } else {
   var https = require('https');
   https.createServer(options, app).listen(port);
@@ -50,7 +52,7 @@ app.get('/api/room/:id', function (req, res) {
 //PeerJS stuff
 var peerServer = PeerServer({
     port: 9000, path: '/connect', 
-    proxied: true,
+    proxied: false,
     ssl: (isDev || isTest) ? undefined : options
   });
 

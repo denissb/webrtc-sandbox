@@ -6,7 +6,8 @@ import {MediaStream} from '../models/media-stream'
     properties: ['media'],
     styleUrls: ['dist/css/components/media-item.css'],
     template: `
-        <video controls [ng-class]="classMap" 
+        <div [ng-class]="classMap"></div>
+        <video controls 
         src={{media.url}} [hidden]='visible'></video>
         `,
     directives: [
@@ -22,8 +23,7 @@ export class MediaItemComponent {
 
     constructor(element: ElementRef) {
         this.videoElement = element.nativeElement.children[0];
-        this.classMap = { 
-            'media-item': true,
+        this.classMap = {
             'no-video': false, 
             'no-audio': false
         };

@@ -1,4 +1,13 @@
 .media-item {
     display: flex;
     flex: 1;
+
+    .no-video {
+        background: url('/assets/images/no-video.svg') no-repeat center;
+        background-size: cover;
+    }
+
+    .no-audio {
+
+    }
 }
