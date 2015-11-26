@@ -1,5 +1,5 @@
 export class PeerConfig {
-    static host = 'localhost';
+    static host = '/';
     static port = 9000;
     static path = '/connect';
 };
