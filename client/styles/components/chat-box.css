@@ -41,9 +41,8 @@
 
     .messages {
         background: #fff;
-        flex: 1;
-        overflow-x: hidden;
-        overflow-y: auto;
+        flex: 1 1 0;
+        overflow: auto;
     }
 
     .message {

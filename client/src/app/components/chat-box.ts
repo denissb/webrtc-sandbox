@@ -42,7 +42,7 @@ export class ChatBoxComponent {
     addMessage(author, msg) {
         let message = new Message(author, msg);
         this.zone.run(() => {
-            this.messages.push(message);
+            this.messages.unshift(message);
         });
     }
 
