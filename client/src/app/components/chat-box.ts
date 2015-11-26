@@ -47,7 +47,12 @@ export class ChatBoxComponent {
     }
 
     sendMessage(msgInput) {
-        let msg = msgInput.value;
+        let msg = msgInput.value.trim();
+
+        if (msg === '') {
+            return;
+        }
+
         msgInput.value = '';
         this.addMessage(this.ownId, msg);
         
