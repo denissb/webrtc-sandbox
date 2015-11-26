@@ -19,19 +19,23 @@
 
   .small-part {
     width: 300px;
-    align-items: stretch;
     flex-flow: column;
     display: flex;
 
     chat-box {
-        flex: 1;
-        display: flex;
+      display: flex;
+      flex: 1;
     }
   }
 
   .big-part {
-    align-items: stretch;
+    display: flex;
     flex-flow: column;
     flex: 1;
+
+    media-box {
+      display: flex;
+      flex: 1;
+    }
   }
 }

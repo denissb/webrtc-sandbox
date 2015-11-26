@@ -1,10 +1,18 @@
 .media-box {
     display: flex;
-    align-items: center;
+    flex: 1;
+    flex-direction: row;
+    flex-wrap: wrap;
 
     h2 {
         font-size: 1.4em;
         margin: 1em;
         text-align: center;
+    }
+
+    media-item {
+        display: flex;
+        flex: 1;
+        min-width: 50%;
     }
 }

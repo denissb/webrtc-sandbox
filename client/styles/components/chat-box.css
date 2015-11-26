@@ -17,6 +17,7 @@
         textarea {
             background: #fff;
             border: none;
+            overflow: hidden;
             flex: 1;
             padding: 0.1em;
             max-width: 100%;
