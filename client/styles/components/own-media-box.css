@@ -1,6 +1,6 @@
 .own-media-box {
     display: flex;
-    flex: 1;
+    flex: 1 0 0;
     flex-direction: column;
     margin: 0 1em 1em;
 
