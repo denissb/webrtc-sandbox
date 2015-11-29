@@ -27,6 +27,11 @@
       display: flex;
       flex: 1;
     }
+
+    own-media-box {
+      display: flex;
+      flex: 1 0 0;
+    }
   }
 
   .big-part {
@@ -39,9 +44,5 @@
       flex: 1;
     }
 
-    own-media-box {
-      display: flex;
-      flex: 1 0 0;
-    }
   }
 }
