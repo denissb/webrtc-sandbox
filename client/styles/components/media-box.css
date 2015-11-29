@@ -5,13 +5,16 @@
     flex-wrap: wrap;
 
     h2 {
-        font-size: 1.4em;
+        font-size: 1.8em;
         margin: 1em;
         text-align: center;
+        flex: 1 1 0;
+        align-self: center;
     }
 
     media-item {
         display: flex;
+        position: relative;
         flex: 1;
         min-width: 50%;
     }

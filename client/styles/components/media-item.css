@@ -3,7 +3,20 @@
     flex: 1;
 }
 
+.overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
 .no-video {
+    @extend .overlay;
     background: url('/assets/images/no-video.svg') no-repeat center;
-    background-size: cover;
+}
+
+.no-audio {
+    @extend .overlay;
+    background: url('/assets/images/no-audio.svg') no-repeat center;
 }

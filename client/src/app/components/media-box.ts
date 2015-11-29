@@ -55,6 +55,8 @@ export class MediaBoxComponent {
         let callURL = this.navigatorService.createObjectURL(stream);
         let mediaStream: MediaStream = new MediaStream(callURL, true, stream);
 
+        console.log(mediaStream);
+
         this.zone.run(() => {
             this.mediaStreams.push(mediaStream);
         });

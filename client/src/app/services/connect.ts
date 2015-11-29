@@ -9,6 +9,7 @@ export class ConnectService {
     dataEmitter: EventEmitter<any> = new EventEmitter();
     mediaEmitter: EventEmitter<any> = new EventEmitter();
     closeEmmiter: EventEmitter<any> = new EventEmitter();
+    ownMediaEmmiter: EventEmitter<any> = new EventEmitter();
 
     constructor(@Inject(PeerService) peerService: PeerService,
         @Inject(NavigatorService) navigatorService: NavigatorService) {
@@ -20,6 +21,7 @@ export class ConnectService {
     start(peers: Array<number>) {
         this.acceptData();
         this.acceptMedia();
+        this.getOwnMedia();
 
         peers.forEach(peerId => {
             this.joinData(peerId);
@@ -93,6 +95,16 @@ export class ConnectService {
         });
     }
 
+    /**
+      Emits own media stream
+    **/
+    private getOwnMedia() {
+        this.navigatorService.getUserMedia().then(stream => {
+            stream.peer = this.peerService.getId();
+            this.ownMediaEmmiter.next(stream);
+        });     
+    }
+
     private emmitMediaStream(stream) {
         this.mediaEmitter.next(stream);
 
@@ -112,6 +124,10 @@ export class ConnectService {
 
     getCallStream(): any {
         return this.mediaEmitter;
+    }
+
+    getOwnMediaStream(): any {
+        return this.ownMediaEmmiter;
     }
 
     getCloseStream(): any {

@@ -53,4 +53,9 @@ export class PeerService {
     getUserId(): string {
         return this.userId;
     }
+
+
+    getId(): string {
+        return this.id;
+    }
 }

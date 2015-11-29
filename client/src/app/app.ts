@@ -9,6 +9,7 @@ import {StartCallComponent} from './components/start-call'
 import {ChatBoxComponent} from './components/chat-box'
 import {MediaBoxComponent} from './components/media-box'
 import {MediaItemComponent} from './components/media-item'
+import {OwnMediaBoxComponent} from './components/own-media-box'
 
 @Component({
     selector: 'web-rtc-app',
@@ -20,7 +21,8 @@ import {MediaItemComponent} from './components/media-item'
         StartCallComponent,
         ChatBoxComponent,
         MediaBoxComponent,
-        MediaItemComponent
+        MediaItemComponent,
+        OwnMediaBoxComponent
         ]
 })
 class WebRTCAppComponent {
