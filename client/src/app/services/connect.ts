@@ -90,6 +90,7 @@ export class ConnectService {
                 stream.peer = call.peer;
                 this.emmitMediaStream(stream);
             });
+
         }, err => {
             console.error(err);
         });
@@ -109,7 +110,7 @@ export class ConnectService {
         this.mediaEmitter.next(stream);
 
         // TODO: implement a faster way to detect a disconnected user
-        stream.addEventListener("ended", e => {
+        stream.addEventListener('inactive', e => {
             this.closeEmmiter.next(e.currentTarget);
         });
     }
