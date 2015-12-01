@@ -41,9 +41,16 @@ export class ChatBoxComponent {
 
     addMessage(author, msg) {
         let message = new Message(author, msg);
+        this.processMessage(message);
         this.zone.run(() => {
             this.messages.unshift(message);
         });
+    }
+
+    processMessage(msg: Message) {
+        let regex = /(http|ftp|https:\/\/[\w\-_]+\.{1}[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?/gi;
+        msg.content = msg.content.replace(regex, `<a href="$1$2" target="_blank">$1$2</a>`);
+        return msg.content;
     }
 
     sendMessage(msgInput) {

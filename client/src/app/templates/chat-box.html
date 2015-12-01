@@ -6,8 +6,7 @@
     </div>
 	<div class="messages">
 		<div *ng-for="#msg of messages" class='message'>
-       		<p [style.border-color]="msg.author" class="author">
-                {{msg.content}}
+       		<p [style.border-color]="msg.author" class="author" [inner-html]="msg.content">
             </p>
     	</div>
 	</div>
