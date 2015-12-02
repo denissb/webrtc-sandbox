@@ -3,12 +3,12 @@ import {MediaStream} from '../models/media-stream'
 
 @Component({
     selector: 'media-item',
-    properties: ['media'],
+    properties: ['media', 'muted'],
     styleUrls: ['dist/css/components/media-item.css'],
     template: `
         <div [ng-class]="classMap"></div>
-        <video controls 
-		class="media-item" src={{media.url}} [hidden]='visible'>
+        <video controls class="media-item" 
+            src={{media.url}} [hidden]='visible' [muted]='muted'>
         </video>
         `,
     directives: [
@@ -20,6 +20,7 @@ export class MediaItemComponent {
     videoElement: any;
     media: MediaStream;
     hidden: boolean;
+    muted: boolean;
     classMap: Object;
 
     constructor(element: ElementRef) {

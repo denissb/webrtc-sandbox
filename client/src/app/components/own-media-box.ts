@@ -10,7 +10,7 @@ import {MediaItemComponent} from './media-item'
     template: `
         <div class="own-media-box" *ng-if="mediaStream">
             <h3>Preview:</h3>
-            <media-item [media]="mediaStream"></media-item>
+            <media-item [media]="mediaStream" [muted]="isMuted"></media-item>
         </div>    
         `,
     directives: [
@@ -23,6 +23,7 @@ export class OwnMediaBoxComponent {
     private connectService: ConnectService;
     private navigatorService: NavigatorService;
     private mediaStream: MediaStream;
+    private isMuted: boolean;
     private zone: NgZone;
 
     constructor(connectService: ConnectService, navigatorService: NavigatorService, zone: NgZone) {
@@ -33,6 +34,10 @@ export class OwnMediaBoxComponent {
         this.connectService.getOwnMediaStream().subscribe(stream => {
             this.addMediaStream(stream);
         });
+
+        this.connectService.getCallStream().subscribe(stream => {
+            this.isMuted = true;
+        }
     }
 
     private addMediaStream(stream) {
