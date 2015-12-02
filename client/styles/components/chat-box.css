@@ -6,7 +6,7 @@
     align-items: stretch;
     
     h2 {
-        font-size: 1em;
+        font-size: 16px;
         font-weight: bold;
         margin: 0.4em 0;
     }
@@ -22,7 +22,7 @@
             padding: 0.1em;
             max-width: 100%;
             resize: none;
-            font-size: 1em;
+            font-size: 16px;
             outline: none;
         }
 
@@ -41,7 +41,7 @@
 
     .messages {
         background: #fff;
-        flex: 1 1 0;
+        flex: 1;
         overflow: auto;
     }
 

@@ -6,11 +6,11 @@
   justify-content: flex-start;
 
   h1 {
-    font-size: 2.2em;
-    margin: 0.4em 0.6em;
+    font-size: 34px;
+    margin: 0.5em;
 
     span {
-        font-size: 0.4em;
+        font-size: 14px;
         position: relative;
         top: 1.4em;
         right: 4.5em;
@@ -25,12 +25,12 @@
 
     chat-box {
       display: flex;
-      flex: 1;
+      flex: 2 0 0;
     }
 
     own-media-box {
       display: flex;
-      flex: 0.8 1 0;
+      flex: 1 0 0;
     }
   }
 
@@ -43,6 +43,5 @@
       display: flex;
       flex: 1;
     }
-
   }
 }
