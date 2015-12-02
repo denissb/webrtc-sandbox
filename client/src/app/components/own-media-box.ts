@@ -37,7 +37,7 @@ export class OwnMediaBoxComponent {
 
         this.connectService.getCallStream().subscribe(stream => {
             this.isMuted = true;
-        }
+        });
     }
 
     private addMediaStream(stream) {
