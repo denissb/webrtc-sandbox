@@ -1,9 +1,13 @@
 <div class='web-rtc-app'>
-    <div class='small-part'>
-        <h1 class='header'>
-            {{title}}
-            <span>{{status}}</span>
-        </h1>
+    <div class='small-part' #sidebar>
+        <div class='header'>
+            <h1>
+                {{title}}
+                <span>{{status}}</span>
+            </h1>
+            <button class='hide-button'
+                (click)="toggleSidebar(sidebar)" title='Toggle sidebar'></button>
+        </div>
         <chat-box></chat-box>
         <own-media-box></own-media-box>
     </div>

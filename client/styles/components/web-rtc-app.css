@@ -5,15 +5,18 @@
   display: flex;
   justify-content: flex-start;
 
+  .header {
+    margin: 1em;
+  }
+
   h1 {
     font-size: 34px;
-    margin: 0.5em;
 
     span {
-        font-size: 14px;
-        position: relative;
-        top: 1.4em;
-        right: 4.5em;
+      font-size: 14px;
+      position: relative;
+      top: 1.4em;
+      right: 4.5em;
     }
   }
 
@@ -32,6 +35,34 @@
       display: flex;
       flex: 1 0 0;
     }
+
+    .hide-button {
+      background: #ccc;
+      float: right;
+      font-size: 32px;
+      font-weight: bold;
+      padding: 0 10px 2px 8px;
+      border: 0;
+      cursor: pointer;
+
+      &:before {
+        content: "\276E";
+      }
+    }
+
+    &.hidden {
+      margin-left: -300px;
+
+      .hide-button {
+        position: relative;
+        z-index: 999;
+        left: 50px;
+
+        &:before {
+          content: "\276F";
+        }
+      }
+    }  
   }
 
   .big-part {
