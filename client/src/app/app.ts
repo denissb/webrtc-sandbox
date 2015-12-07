@@ -29,7 +29,9 @@ class WebRTCAppComponent {
     public title = 'WebRTC app';
     public status = 'pre-alpha';
 
-    constructor() { }
+    toggleSidebar(sidebar) {
+        sidebar.classList.toggle('hidden');
+    }
 }
 
 bootstrap(WebRTCAppComponent,
