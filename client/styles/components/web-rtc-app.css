@@ -25,6 +25,7 @@
     max-height: 100%;
     flex-flow: column;
     display: flex;
+    transition: margin 0.5s linear;
 
     chat-box {
       display: flex;
@@ -52,6 +53,7 @@
 
     &.hidden {
       margin-left: -300px;
+      transition: margin 0.5s linear;
 
       .hide-button {
         position: relative;
