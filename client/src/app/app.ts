@@ -28,6 +28,13 @@ import {OwnMediaBoxComponent} from './components/own-media-box'
 class WebRTCAppComponent {
     public title = 'WebRTC app';
     public status = 'pre-alpha';
+    public initialised = false;
+
+    constructor(connectService: ConnectService) {
+        connectService.getStatusStream().subscribe(next => {
+            this.initialised = true;
+        })
+    }    
 
     toggleSidebar(sidebar) {
         sidebar.classList.toggle('hidden');

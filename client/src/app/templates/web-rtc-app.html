@@ -5,7 +5,7 @@
                 {{title}}
                 <span>{{status}}</span>
             </h1>
-            <button class='hide-button'
+            <button class='hide-button' [hidden]='!initialised'
                 (click)="toggleSidebar(sidebar)" title='Toggle sidebar'></button>
         </div>
         <chat-box></chat-box>
