@@ -1,15 +1,11 @@
-import {Component, View, CORE_DIRECTIVES, FORM_DIRECTIVES, NgZone} from 'angular2/angular2'
+import {Component, View, NgZone} from 'angular2/core'
 import {ConnectService} from '../services/connect'
 import {Message} from '../models/message'
 
 @Component({
     selector: 'chat-box',
     templateUrl: './src/app/templates/chat-box.html',
-    styleUrls: ['dist/css/components/chat-box.css'],
-    directives: [
-        CORE_DIRECTIVES,
-        FORM_DIRECTIVES
-    ]    
+    styleUrls: ['dist/css/components/chat-box.css']
 })
 export class ChatBoxComponent {
     private connectService: ConnectService;

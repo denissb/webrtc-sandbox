@@ -1,4 +1,5 @@
-import {Component, bootstrap, CORE_DIRECTIVES, FORM_DIRECTIVES} from 'angular2/angular2';
+import {Component} from 'angular2/core';
+import {bootstrap} from 'angular2/platform/browser'
 import {ConnectService} from './services/connect'
 import {PeerService} from './services/peer'
 import {APIService} from './services/api'
@@ -16,8 +17,6 @@ import {OwnMediaBoxComponent} from './components/own-media-box'
     templateUrl: '/src/app/templates/web-rtc-app.html',
     styleUrls: ['dist/css/components/web-rtc-app.css'],
     directives: [
-        CORE_DIRECTIVES,
-        FORM_DIRECTIVES,
         StartCallComponent,
         ChatBoxComponent,
         MediaBoxComponent,

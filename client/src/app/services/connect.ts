@@ -1,4 +1,4 @@
-import {Inject, EventEmitter} from 'angular2/angular2'
+import {Inject, EventEmitter} from 'angular2/core'
 import {PeerService} from './peer'
 import {NavigatorService} from './navigator'
 

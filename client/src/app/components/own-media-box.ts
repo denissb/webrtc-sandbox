@@ -1,4 +1,4 @@
-import {Component, View, CORE_DIRECTIVES, FORM_DIRECTIVES, NgZone} from 'angular2/angular2'
+import {Component, View, NgZone} from 'angular2/core'
 import {ConnectService} from '../services/connect'
 import {NavigatorService} from '../services/navigator'
 import {MediaStream} from '../models/media-stream'
@@ -8,14 +8,12 @@ import {MediaItemComponent} from './media-item'
     selector: 'own-media-box',
     styleUrls: ['dist/css/components/own-media-box.css'],
     template: `
-        <div class="own-media-box" *ng-if="mediaStream">
+        <div class="own-media-box" *ngIf="mediaStream">
             <h3>Preview:</h3>
             <media-item [media]="mediaStream" [muted]="isMuted"></media-item>
         </div>    
         `,
     directives: [
-        CORE_DIRECTIVES,
-        FORM_DIRECTIVES,
         MediaItemComponent
     ]
 })

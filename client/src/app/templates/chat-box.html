@@ -1,12 +1,12 @@
-<div *ng-if="connections.length > 0" class='chat-box'>
+<div *ngIf="connections.length > 0" class='chat-box'>
     <h2>Messages:</h2>
     <div class='message-input'>
     	<textarea #msg (keyup.enter)="sendMessage(msg)" placeholder="Type your message.." rows="1"></textarea>
 	    <button (click)="sendMessage(msg)">Send</button>
     </div>
 	<div class="messages">
-		<div *ng-for="#msg of messages" class='message'>
-       		<p [style.border-color]="msg.author" class="author" [inner-html]="msg.content">
+		<div *ngFor="#msg of messages" class='message'>
+       		<p [style.border-color]="msg.author" class="author" [innerHtml]="msg.content">
             </p>
     	</div>
 	</div>

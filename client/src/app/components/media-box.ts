@@ -1,4 +1,4 @@
-import {Component, View, CORE_DIRECTIVES, FORM_DIRECTIVES, NgZone} from 'angular2/angular2'
+import {Component, View, NgZone} from 'angular2/core'
 import {ConnectService} from '../services/connect'
 import {NavigatorService} from '../services/navigator'
 import {MediaStream} from '../models/media-stream'
@@ -9,14 +9,12 @@ import {MediaItemComponent} from './media-item'
     styleUrls: ['dist/css/components/media-box.css'],
     template: `
         <div class="media-box">
-            <h2 *ng-if="isOpen && mediaStreams.length === 0">No peers connected</h2>
-            <media-item *ng-for="#mediaStream of mediaStreams"
+            <h2 *ngIf="isOpen && mediaStreams.length === 0">No peers connected</h2>
+            <media-item *ngFor="#mediaStream of mediaStreams"
                 [media]="mediaStream"></media-item>
         </div>    
         `,
     directives: [
-        CORE_DIRECTIVES,
-        FORM_DIRECTIVES,
         MediaItemComponent
     ]
 })

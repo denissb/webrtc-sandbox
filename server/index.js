@@ -5,7 +5,7 @@ var fs = require('fs'),
     port = process.env.PORT || 3000,
     path = require('path'),
     serverPath = path.resolve(__dirname),
-    rooms = require('./modules/rooms'),
+    Rooms = require('./modules/rooms'),
     isDev = (process.env.NODE_ENV === 'development') ? true : false;
     isTest = (process.env.NODE_ENV === 'test') ? true: false; 
 
@@ -14,7 +14,8 @@ var options = {
     cert: fs.readFileSync(process.env.SSl_CRT_PATH || serverPath + '/ssl/webrtc.crt')
 };
 
-var peerRooms = rooms();
+var peerRooms = Rooms();
+
 if (isDev || isTest) {
   var http = require('http');
   http.createServer(app).listen(port);

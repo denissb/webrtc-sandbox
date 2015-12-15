@@ -1,4 +1,5 @@
-import {Component, View, CORE_DIRECTIVES, NgClass, ElementRef} from 'angular2/angular2'
+import {Component, View, ElementRef} from 'angular2/core'
+import {NgClass}  from 'angular2/common'
 import {MediaStream} from '../models/media-stream'
 
 @Component({
@@ -6,13 +7,12 @@ import {MediaStream} from '../models/media-stream'
     properties: ['media', 'muted'],
     styleUrls: ['dist/css/components/media-item.css'],
     template: `
-        <div [ng-class]="classMap"></div>
+        <div [ngClass]="classMap"></div>
         <video controls class="media-item" 
             src={{media.url}} [hidden]='visible' [muted]='muted'>
         </video>
         `,
     directives: [
-        CORE_DIRECTIVES,
         NgClass
     ]
 })
@@ -32,7 +32,7 @@ export class MediaItemComponent {
         this.hidden = true;
     }
 
-    onInit() {
+    ngOnInit() {
         // Binding to video events - maybe this should be encapsulated?
         this.videoElement.addEventListener('canplay', (e) => {
             this.checkState();
